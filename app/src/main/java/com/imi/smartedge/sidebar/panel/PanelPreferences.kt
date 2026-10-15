@@ -605,8 +605,8 @@ class PanelPreferences(context: Context) {
         set(value) = prefs.edit { putString(KEY_ACCENT_COLOR, value) }
 
     var panelColumns: Int
-        get() = (prefs.getInt(KEY_PANEL_COLUMNS, DEFAULT_PANEL_COLS)).coerceIn(1, 2)
-        set(value) = prefs.edit { putInt(KEY_PANEL_COLUMNS, value.coerceIn(1, 2)) }
+        get() = (prefs.getInt(KEY_PANEL_COLUMNS, DEFAULT_PANEL_COLS)).coerceIn(1, 3)
+        set(value) = prefs.edit { putInt(KEY_PANEL_COLUMNS, value.coerceIn(1, 3)) }
 
     var uiTheme: String
         get() = prefs.getString(KEY_UI_THEME, DEFAULT_THEME) ?: DEFAULT_THEME
