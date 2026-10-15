@@ -7,15 +7,17 @@
     android:clipChildren="false">
 
     <!-- Container for the panel -->
-    <LinearLayout
+   <LinearLayout
     android:id="@+id/panelContainer"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_alignParentEnd="true"
     android:layout_marginEnd="12dp"
-        android:clipChildren="false"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:clipChildren="false"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 <!-- Main Sidebar Pill -->
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/panelCard"
