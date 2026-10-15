@@ -282,15 +282,24 @@ class FloatingPanelService : Service() {
                     sidePanelView?.refreshIcons()
                     
                     // Update side/picker gravity in case it changed
-                    val isRightSide = panelPrefs.panelSide == PanelPreferences.SIDE_RIGHT
-                    sidePanelView?.let { panel ->
-                        val lp = panel.layoutParams as? android.widget.FrameLayout.LayoutParams
-                        if (lp != null) {
-                            lp.gravity = if (isRightSide) Gravity.END or Gravity.CENTER_VERTICAL
-                                         else Gravity.START or Gravity.CENTER_VERTICAL
-                            panel.layoutParams = lp
-                        }
-                    }
+val isRightSide = panelPrefs.panelSide == PanelPreferences.SIDE_RIGHT
+sidePanelView?.let { panel ->
+    val lp = panel.layoutParams as? android.widget.FrameLayout.LayoutParams
+    if (lp != null) {
+        // --- RECALCULAR ANCHO DINÁMICO ---
+        val density = resources.displayMetrics.density
+        val columns = panelPrefs.panelColumns
+        val iconWidthDp = 48f
+        val marginDp = 8f
+        val calculatedWidthDp = (iconWidthDp + marginDp) * columns + 24f
+        lp.width = (calculatedWidthDp * density).toInt()
+        // --- FIN DEL CÁLCULO ---
+        
+        lp.gravity = if (isRightSide) Gravity.END or Gravity.CENTER_VERTICAL
+                     else Gravity.START or Gravity.CENTER_VERTICAL
+        panel.layoutParams = lp
+    }
+}
                     pickerPanelView?.let { picker ->
                         val lp = picker.layoutParams as? android.widget.FrameLayout.LayoutParams
                         if (lp != null) {
