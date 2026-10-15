@@ -393,11 +393,11 @@ class SidePanelView @JvmOverloads constructor(
         val lp = binding.panelCard.layoutParams
         
         // Scale only the icon area, keeping the padding/chrome fixed
-        val newWidthDp = if (currentCols == 2) {
-            52f + (88f * scale)
-        } else {
-            32f + (40f * scale)
-        }
+        val newWidthDp = when (currentCols) {
+    3 -> 64f + (136f * scale)   // 3 columnas
+    2 -> 52f + (88f * scale)    // 2 columnas
+    else -> 32f + (40f * scale) // 1 columna
+}
         
         lp.width = context.dpToPx(newWidthDp.toInt())
         binding.panelCard.layoutParams = lp
