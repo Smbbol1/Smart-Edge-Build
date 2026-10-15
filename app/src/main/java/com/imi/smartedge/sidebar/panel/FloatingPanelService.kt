@@ -865,23 +865,34 @@ class FloatingPanelService : Service() {
         }
         updateBlur(true)
         sidePanelView?.updateStyles() // Evaluate Game Mode columns & update layout
-        sidePanelView?.let { panel ->
-            val isRight = panelPrefs.panelSide == PanelPreferences.SIDE_RIGHT
-            val lp = panel.layoutParams as android.widget.FrameLayout.LayoutParams
-            lp.width = android.widget.FrameLayout.LayoutParams.WRAP_CONTENT
-            lp.height = android.widget.FrameLayout.LayoutParams.MATCH_PARENT
-            lp.gravity = if (isRight) Gravity.END or Gravity.CENTER_VERTICAL
-                         else Gravity.START or Gravity.CENTER_VERTICAL
-            panel.layoutParams = lp
-            panel.alpha = 0f
-            panel.translationX = if (isRight) 1000f else -1000f
-            panel.visibility = View.VISIBLE
-            panel.post {
-                val panelWidth = panel.width.toFloat()
-                val stiffness = panelPrefs.animSpeed.toFloat()
-                SpringAnimator.animateOpen(panel, if (isRight) panelWidth else -panelWidth, stiffness = stiffness)
-            }
-        }
+       sidePanelView?.let { panel ->
+    val isRight = panelPrefs.panelSide == PanelPreferences.SIDE_RIGHT
+    val lp = panel.layoutParams as android.widget.FrameLayout.LayoutParams
+    
+    // --- CÁLCULO DINÁMICO DEL ANCHO SEGÚN COLUMNAS ---
+    val density = resources.displayMetrics.density
+    val columns = panelPrefs.panelColumns
+    val iconWidthDp = 48f
+    val marginDp = 8f
+    val calculatedWidthDp = (iconWidthDp + marginDp) * columns + 24f
+    val calculatedWidthPx = (calculatedWidthDp * density).toInt()
+    
+    lp.width = calculatedWidthPx
+    // --- FIN DEL CÁLCULO ---
+    
+    lp.height = android.widget.FrameLayout.LayoutParams.MATCH_PARENT
+    lp.gravity = if (isRight) Gravity.END or Gravity.CENTER_VERTICAL
+                 else Gravity.START or Gravity.CENTER_VERTICAL
+    panel.layoutParams = lp
+    panel.alpha = 0f
+    panel.translationX = if (isRight) 1000f else -1000f
+    panel.visibility = View.VISIBLE
+    panel.post {
+        val panelWidth = panel.width.toFloat()
+        val stiffness = panelPrefs.animSpeed.toFloat()
+        SpringAnimator.animateOpen(panel, if (isRight) panelWidth else -panelWidth, stiffness = stiffness)
+    }
+}
         edgeHandleView?.visibility = View.GONE
     }
 
