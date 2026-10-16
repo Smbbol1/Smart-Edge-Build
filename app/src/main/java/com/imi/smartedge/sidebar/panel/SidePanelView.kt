@@ -454,6 +454,10 @@ class SidePanelView @JvmOverloads constructor(
                 containerLp.marginStart = context.dpToPx(12)
                 containerLp.marginEnd = 0
             }
+ // --- AÑADIR ESTAS DOS LÍNEAS ---
+    //containerLp.topMargin = context.dpToPx(8)
+    //containerLp.bottomMargin = context.dpToPx(8)
+    // --- FIN ---
             binding.panelContainer.layoutParams = containerLp
         }
     }
