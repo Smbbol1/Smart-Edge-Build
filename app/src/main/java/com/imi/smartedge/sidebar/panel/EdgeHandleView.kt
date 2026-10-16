@@ -476,9 +476,9 @@ class EdgeHandleView @JvmOverloads constructor(
                         holdDurationMs
                     }
                     
-                    handler.postDelayed(holdRunnable, effectiveHoldTime)
+                  holdRunnable.run()
                     if (showPill) {
-                        animate().scaleX(0.7f).scaleY(0.9f).setDuration(effectiveHoldTime).start()
+                       animate().scaleX(0.7f).scaleY(0.9f).setDuration(100).start()
                     }
                 }
 
