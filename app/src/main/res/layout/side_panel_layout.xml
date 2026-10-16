@@ -13,8 +13,6 @@
     android:layout_height="match_parent"
     android:layout_alignParentEnd="true"
     android:layout_marginEnd="12dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
     android:clipChildren="false"
     android:gravity="center_horizontal"
     android:orientation="vertical">
@@ -22,7 +20,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/panelCard"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/bg_panel"
     android:elevation="32dp"
     android:paddingTop="12dp"
